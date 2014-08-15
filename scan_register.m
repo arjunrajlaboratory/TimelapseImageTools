@@ -55,12 +55,12 @@ for currentTime = 1:138
     arrayOfPositions = 1:numPositions;
     matrixOfPositions = reshape(arrayOfPositions,numXPositions,numYPositions);
     
-    %for i = 2:2:numXPositions
-    %    matrixOfPositions(:,i) = flipud(matrixOfPositions(:,i));
-    %end
+%     for i = 2:2:numXPositions
+%        matrixOfPositions(:,i) = flipud(matrixOfPositions(:,i));
+%     end
     
     registerPosition.row = 8;
-    registerPosition.col = 3;
+    registerPosition.col = 8;
     
     imagesize = 1024;
     
