@@ -44,9 +44,9 @@
 % imtest(1:1024,1+25:1024+25) = im1;
 %******************
 
-currentTime = 9;
+currentTime = 138;
 
-for currentTime = 9:9
+for currentTime = 1:138
     numPositions = 289;
     numXPositions = 17;
     numYPositions = 17;
