@@ -145,9 +145,12 @@ for currentTime = 9:9
             (imNewPercentiles(3)-imNewPercentiles(1))*...
             (im1Percentiles(3)-im1Percentiles(1)) + im1Percentiles(2);
         
+        withtext = insertText(imageToAdd, [512 512], i, 'FontSize', 72, 'BoxOpacity', 0, 'TextColor', 'white');
+        withtextgray =  rgb2gray(withtext);
+        
         compositeIm(topCoords(i):topCoords(i)+imagesize-1, ...
             leftCoords(i):leftCoords(i)+imagesize-1) = ...
-            im2uint16(imageToAdd);
+            im2uint16(withtextgray);
     end
 
     %compositeIm(compositeIm==0) = median(doubleIm(:));

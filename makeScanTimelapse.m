@@ -1,10 +1,14 @@
-R = getrect;
 
 D = dir('stitch*.jpg');
 
 numFrames = numel(D);
 
 im1 = imread('stitch1.jpg');
+
+imshow(im1);
+
+R = getrect;
+
 
 imcr = imcrop(im1,R);
 

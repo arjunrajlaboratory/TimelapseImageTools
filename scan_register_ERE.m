@@ -44,12 +44,12 @@
 % imtest(1:1024,1+25:1024+25) = im1;
 %******************
 
-currentTime = 1;
+currentTime = 128;
 
-for currentTime = 1:1
-    numPositions = 289;
-    numXPositions = 17;
-    numYPositions = 17;
+for currentTime = 128:128
+    numPositions = 256;
+    numXPositions = 16;
+    numYPositions = 16;
     
     
     arrayOfPositions = 1:numPositions;
