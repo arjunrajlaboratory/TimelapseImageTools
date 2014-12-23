@@ -44,12 +44,12 @@
 % imtest(1:1024,1+25:1024+25) = im1;
 %******************
 
-currentTime = 9;
-
-for currentTime = 9:9
-    numPositions = 289;
-    numXPositions = 17;
-    numYPositions = 17;
+currentTime = 1;
+channel = 'trans';
+for currentTime = 1:1
+    numPositions = 832;
+    numXPositions = 32;
+    numYPositions = 26;
     
     
     arrayOfPositions = 1:numPositions;
@@ -58,9 +58,9 @@ for currentTime = 9:9
 %     for i = 2:2:numXPositions
 %        matrixOfPositions(:,i) = flipud(matrixOfPositions(:,i));
 %     end
-    
-    registerPosition.row = 8;
-    registerPosition.col = 8;
+%     
+    registerPosition.row = 10;
+    registerPosition.col = 12;
     
     imagesize = 1024;
     
@@ -69,7 +69,8 @@ for currentTime = 9:9
     ims = zeros(imagesize,imagesize,numPositions,'uint16');
     
     for i = 1:numPositions
-        name = ['Scan' num2str(currentTime,'%3.3d') '_w1_s' num2str(i) '_t1.TIF'];
+        %name = ['Scan' num2str(currentTime,'%3.3d') '_w1_s' num2str(i) '_t1.TIF'];
+        name = [channel num2str(i, '%3.3d') '.TIF'];
         ims(:,:,i) = imread(name);
     end
     
@@ -128,25 +129,26 @@ for currentTime = 9:9
     
     im1 = ims(:,:,matrixOfPositions(registerPosition.row,registerPosition.col));
     doubleIm = im2double(im1);  % Register image
+%     im1 = doubleIm;
     im1 = (doubleIm - imfilter(doubleIm,h,'replicate'));
-    im1 = (im1-min(im1(:)))*10;
-    srt1 = sort(im1(:));
-    im1Percentiles = srt1(round(length(srt1)*[0.25 0.50 0.75]));
+%     im1 = (im1-min(im1(:)))*10;
+%     srt1 = sort(im1(:));
+%     im1Percentiles = srt1(round(length(srt1)*[0.1 0.50 0.75]));
     
     for i = numPositions:-1:1
         
         doubleIm = im2double(ims(:,:,i));
+%         imageToAdd = doubleIm;
         imageToAdd = (doubleIm - imfilter(doubleIm,h,'replicate'));
-        imageToAdd = (imageToAdd-min(imageToAdd(:)))*10;
+%         imageToAdd = (imageToAdd-min(imageToAdd(:)))*10;
         
-        srt = sort(imageToAdd);
-        imNewPercentiles = srt(round(length(srt)*[0.25 0.50 0.75]));
-        imageToAdd = (imageToAdd - imNewPercentiles(2))/...
-            (imNewPercentiles(3)-imNewPercentiles(1))*...
-            (im1Percentiles(3)-im1Percentiles(1)) + im1Percentiles(2);
-        
-        withtext = insertText(imageToAdd, [512 512], i, 'FontSize', 72, 'BoxOpacity', 0, 'TextColor', 'white');
-        withtextgray =  rgb2gray(withtext);
+%         srt = sort(imageToAdd);
+%         imNewPercentiles = srt(round(length(srt)*[0.25 0.50 0.75]));
+%         imageToAdd = (imageToAdd - imNewPercentiles(2))/...
+%             (imNewPercentiles(3)-imNewPercentiles(1))*...
+%             (im1Percentiles(3)-im1Percentiles(1)) + im1Percentiles(2);
+%         imageToAdd = (imageToAdd - imNewPercentiles(2))*(im1Percentiles(3)-im1Percentiles(1)) + im1Percentiles(2);
+
         
         compositeIm(topCoords(i):topCoords(i)+imagesize-1, ...
             leftCoords(i):leftCoords(i)+imagesize-1) = ...
@@ -157,7 +159,7 @@ for currentTime = 9:9
     
     compositeIm = im2uint16(scale(compositeIm)*2);
     
-    imwrite(im2uint8(compositeIm),['stitch' num2str(currentTime) '.jpg']);
+    imwrite(im2uint8(compositeIm),['stitch' channel num2str(currentTime) '.jpg']);
     
 end
 
