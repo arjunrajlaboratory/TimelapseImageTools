@@ -74,6 +74,12 @@ for currentTime = 1:1
         ims(:,:,i) = imread(name);
     end
     
+    medianimg = median(ims, 3);
+    
+    for i = 1:numPositions
+        ims(:,:,i) = imsubtract(ims(:,:,i), medianimg);
+    end
+    
     
     %im1 = ims(:,:,36);
     %im2 = ims(:,:,37);
@@ -131,7 +137,7 @@ for currentTime = 1:1
     doubleIm = im2double(im1);  % Register image
 %     im1 = doubleIm;
     im1 = (doubleIm - imfilter(doubleIm,h,'replicate'));
-    im1 = (im1-0.09*min(im1(:)))*10;
+%     im1 = (im1-0.09*min(im1(:)))*10;
     srt1 = sort(im1(:));
     im1Percentiles = srt1(round(length(srt1)*[0.01 0.50 0.75]));
     
@@ -140,7 +146,7 @@ for currentTime = 1:1
         doubleIm = im2double(ims(:,:,i));
 %         imageToAdd = doubleIm;
         imageToAdd = (doubleIm - imfilter(doubleIm,h,'replicate'));
-        imageToAdd = (imageToAdd-0.09*min(imageToAdd(:)))*10;
+%         imageToAdd = (imageToAdd-0.09*min(imageToAdd(:)))*10;
         
         srt = sort(imageToAdd);
         imNewPercentiles = srt(round(length(srt)*[0.01 0.50 0.75]));
