@@ -243,7 +243,7 @@ function Hs = getMaxes(Hs,updateAllImgs)
         Hs.RI = readmm(sprintf('%s%s%s%03d%s',...
                    Hs.dirPath,filesep,Hs.RNAchannel,Hs.fileNum,Hs.imgExts{currInd}));
         Hs.RI = Hs.RI.imagedata; 
-        Hs.RI = scale(max(Hs.RI(:,:,round(linspace(3,size(Hs.RI,3),10))),[],3));
+        Hs.RI = scale(Hs.RI(:,:,1));
         Hs.RI2 = scale(medfilt2(Hs.RI));
     end
 
@@ -256,7 +256,7 @@ function Hs = getMaxes(Hs,updateAllImgs)
             set(Hs.transCheck,'Enable','off','Value',0);
         else
             Hs.TI = readmm(sprintf('%s%s%s%03d%s',Hs.dirPath,filesep,...
-                            Hs.foundChannels{tF},Hs.fileNum,Hs.imgExts{tF}),3);
+                            Hs.foundChannels{tF},Hs.fileNum,Hs.imgExts{tF}));
             Hs.TI = scale(Hs.TI.imagedata);
             set(Hs.transCheck,'Enable','on');
         end
@@ -269,7 +269,7 @@ function Hs = getMaxes(Hs,updateAllImgs)
             Hs.DI = readmm(sprintf('%s%s%s%03d%s',Hs.dirPath,filesep,...
                             Hs.foundChannels{dF},Hs.fileNum,Hs.imgExts{dF}));
             Hs.DI = Hs.DI.imagedata;
-            Hs.DI = scale(max(Hs.DI(:,:,round(linspace(3,size(Hs.DI,3),4))),[],3));
+            Hs.DI = scale(Hs.DI(:,:,1));
             set(Hs.dapiCheck,'Enable','on');
         end
     end

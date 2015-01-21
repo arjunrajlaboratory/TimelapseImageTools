@@ -1,4 +1,4 @@
-syntax: glob
-*.RData
-.Rapp.history
-.DS_Store        
+syntax:glob
+
+*~
+.DS_Store
