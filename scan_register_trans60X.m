@@ -47,9 +47,9 @@
 currentTime = 1;
 channel = 'trans';
 for currentTime = 1:1
-    numPositions = 25;
-    numXPositions = 5;
-    numYPositions = 5;
+    numPositions = 1610;
+    numXPositions = 23;
+    numYPositions = 70;
     
     
     arrayOfPositions = 1:numPositions;
@@ -59,8 +59,8 @@ for currentTime = 1:1
 %        matrixOfPositions(:,i) = flipud(matrixOfPositions(:,i));
 %     end
 %     
-    registerPosition.row = 4;
-    registerPosition.col = 4;
+    registerPosition.row = 15;
+    registerPosition.col = 15;
     
     imagesize = 1024;
     
@@ -74,11 +74,11 @@ for currentTime = 1:1
         ims(:,:,i) = imread(name);
     end
     
-    medianimg = median(ims, 3);
-    
-    for i = 1:numPositions
-        ims(:,:,i) = imsubtract(ims(:,:,i), medianimg);
-    end
+%     medianimg = median(ims, 3);
+%     
+%     for i = 1:numPositions
+%         ims(:,:,i) = imsubtract(ims(:,:,i), medianimg);
+%     end
     
     
     %im1 = ims(:,:,36);

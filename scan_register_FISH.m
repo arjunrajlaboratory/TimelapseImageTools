@@ -45,7 +45,7 @@
 %******************
 
 currentTime = 1;
-channel = 'trans';
+channel = 'nir';
 for currentTime = 1:1
     numPositions = 25;
     numXPositions = 5;
@@ -134,7 +134,7 @@ for currentTime = 1:1
     im1 = (im1-0.09*min(im1(:)))*10;
     srt1 = sort(im1(:));
     im1Percentiles = srt1(round(length(srt1)*[0.01 0.50 0.75]));
-    
+%     
     for i = numPositions:-1:1
         
         doubleIm = im2double(ims(:,:,i));

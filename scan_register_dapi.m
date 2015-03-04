@@ -47,9 +47,9 @@
 currentTime = 1;
 channel = 'dapi';
 for currentTime = 1:1
-    numPositions = 25;
-    numXPositions = 5;
-    numYPositions = 5;
+    numPositions = 1610;
+    numXPositions = 23;
+    numYPositions = 70;
     
     
     arrayOfPositions = 1:numPositions;
@@ -59,8 +59,8 @@ for currentTime = 1:1
 %        matrixOfPositions(:,i) = flipud(matrixOfPositions(:,i));
 %     end
 %     
-    registerPosition.row = 4;
-    registerPosition.col = 4;
+    registerPosition.row = 12;
+    registerPosition.col = 12;
     
     imagesize = 1024;
     
@@ -131,19 +131,19 @@ for currentTime = 1:1
     doubleIm = im2double(im1);  % Register image
     im1 = doubleIm;
 %     im1 = (doubleIm - imfilter(doubleIm,h,'replicate'));
-%     im1 = (im1-min(im1(:)))*10;
+    im1 = (im1-min(im1(:)))*10;
     srt1 = sort(im1(:));
-    im1Percentiles = srt1(round(length(srt1)*[0.01 0.50 0.9]));
+    im1Percentiles = srt1(round(length(srt1)*[0.25 0.50 0.95]));
     
     for i = numPositions:-1:1
         
         doubleIm = im2double(ims(:,:,i));
         imageToAdd = doubleIm;
 %         imageToAdd = (doubleIm - imfilter(doubleIm,h,'replicate'));
-%         imageToAdd = (imageToAdd-min(imageToAdd(:)))*10;
+        imageToAdd = (imageToAdd-min(imageToAdd(:)))*10;
         
         srt = sort(imageToAdd);
-        imNewPercentiles = srt(round(length(srt)*[0.01 0.50 0.9]));
+        imNewPercentiles = srt(round(length(srt)*[0.25 0.50 0.95]));
         imageToAdd = (imageToAdd - imNewPercentiles(2))/...
             (imNewPercentiles(3)-imNewPercentiles(1))*...
             (im1Percentiles(3)-im1Percentiles(1)) + im1Percentiles(2);

@@ -46,7 +46,7 @@
 
 currentTime = 138;
 
-for currentTime = 8:138
+for currentTime = 138:138
     numPositions = 289;
     numXPositions = 17;
     numYPositions = 17;

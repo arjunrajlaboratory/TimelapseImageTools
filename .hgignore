@@ -1,4 +1,4 @@
 syntax:glob
 
-*~
+*.m~
 .DS_Store
